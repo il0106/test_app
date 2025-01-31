@@ -1,39 +1,28 @@
-version: '3'
+networks:
+  dev:
 
 services:
   nginx:
     image: nginx:stable-alpine
-    container_name: nginx
-    restart: always
     depends_on:
-      - frontend
       - backend
+      - frontend
     ports:
       - "80:80"
     volumes:
       - './nginx.conf:/etc/nginx/nginx.conf'
     networks:
       - dev
+
   backend:
-    build: ./backend
-    container_name: backend
-    restart: always
-    ports:
-      - "8000:8000"
+    build: 
+      context: ./backend
     networks:
       - dev
 
   frontend:
-    build: ./frontend
-    container_name: frontend
-    restart: always
-    depends_on:
-      - backend
-    ports:
-      - "8080:80"
+    build: 
+      context: ./frontend
     networks:
       - dev
 
-networks:
-  dev:
-    driver: bridge
