@@ -8,8 +8,10 @@ app = FastAPI()
 # Разрешаем CORS для фронтенда
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080",
-                   "http://109.196.102.43"],  # В продакшене укажите конкретный домен фронтенда
+    allow_origins=[
+        "http://localhost",
+        "http://localhost:80",
+        "http://109.196.102.43"],  # В продакшене укажите конкретный домен фронтенда
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
